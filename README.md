@@ -33,7 +33,7 @@ pip install --user requests lxml regex
 
 ```
 
-Download files from the folder "code" and save to your computer.
+Download "Source code" of the [last release](../../releases/) and save to your computer. Extract archive.
 
 In GoldenDict, open menu Edit|Dictionaries, tab Programs. Add new item:
 
