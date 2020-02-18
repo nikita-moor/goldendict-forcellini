@@ -1,0 +1,41 @@
+entryfree {
+  display: block;
+  margin-top: 1em;
+}
+
+sense {
+  display: block;
+  margin-top: .5em;
+  margin-left: 2em;
+  position: relative;
+}
+
+sense:before {
+  content: attr(marker);
+  position: absolute;
+  left: -3em;
+  width: 2.8em;
+  text-align: right;
+  color: red;
+  font-weight: bold;
+}
+
+hi[rend="bold"]   { font-weight: bold;  }
+hi[rend="italic"] { font-style: italic; }
+
+br {
+  display: block;
+  content: "";
+  margin-top: 0.5em;
+}
+
+span.lang {
+  color: white;
+  background: grey;
+  font-weight: bold;
+  padding-left: .2em;
+  padding-right: .2em;
+}
+
+span:lang(gr) { color: #780373; }
+
