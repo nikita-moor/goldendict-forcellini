@@ -17,7 +17,7 @@ Raw requests are saved into the local cache (`code/cache`) to reduce website tra
 
 ### Source
 
-* Forcellini, Egidio; Furlanetto, Giuseppe; Corradini, Francesco; Perin, Josephus. Lexicon Totius Latinitatis. Padua, 1771, 1940 (reprint). URL: <http://www.documentacatholicaomnia.eu/25_90_1688-1768-_Forcellini_Aeg.html>.
+* Forcellini, Egidio; Furlanetto, Giuseppe; Corradini, Francesco; Perin, Josephus. _Lexicon Totius Latinitatis_. Padua, 1771, 1940 (reprint). URL: <http://www.documentacatholicaomnia.eu/25_90_1688-1768-_Forcellini_Aeg.html>.
 
 Dictionary was digitized by Martin Holan (@Godmy) and is available for free use from the website online: [www.lexica.linguax.com](http://www.lexica.linguax.com/).
 
