@@ -6,7 +6,7 @@ This addon for GoldenDict downloads articles from the website and slightly refor
 
 **N.B.:** Addon is made for _desktop_ version of the GoldenDict, it does not work with _mobile_ application.
 
-Raw requests are saved into the local cache (`code/cache`) to reduce website traffic and improve responce to the frequent queries. Directory of the cache can be safely cleaned or completely removed.
+Raw requests are saved into the local cache (`code/cache`) to reduce website traffic and improve response to the frequent queries. Directory of the cache can be safely cleaned or completely removed.
 
 
 ### Exemplum
