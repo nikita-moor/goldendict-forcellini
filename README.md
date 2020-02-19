@@ -39,7 +39,7 @@ In GoldenDict, open menu Edit|Dictionaries, tab Programs. Add new item:
 
 - type: Html
 - name: Forcellini (on your choice)
-- command line: python /path/to/main.py %GDWORD%
+- command line: `python /path/to/code/main.py %GDWORD%` (correct the path)
 
 Press "OK" button.
 
