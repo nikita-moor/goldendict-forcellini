@@ -24,16 +24,18 @@ Dictionary was digitized by Martin Holan (@Godmy) and is available for free use 
 
 ### Install
 
-Following documentation is written for Linux users. If your operation system is Windows or MacOS and you are not an experienced user, [make request](../../issues), please, for additional instructions.
+***Windows***: special version and instructions are [here](../../releases/tag/1.1).
 
-Required Python libraries: requests, lxml, regex. Use your package manager (preferred) or `pip`:
+***Linux***:
+
+Required Python libraries: requests, lxml, regex. Use your package manager (preferred) to install them or run the following command in console:
 
 ```sh
 pip install --user requests lxml regex 
 
 ```
 
-Download "Source code" of the [last release](../../releases/) and save to your computer. Extract archive.
+Download "Source code" of the [last release](../../releases/tag/v1.0) and save to your computer. Extract archive.
 
 In GoldenDict, open menu Edit|Dictionaries, tab Programs. Add new item:
 
