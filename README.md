@@ -28,7 +28,11 @@ Dictionary was digitized by Martin Holan (@Godmy) and is available for free use 
 
 ***Linux***:
 
-Required Python libraries: requests, lxml, regex. Use your package manager (preferred) to install them or run the following command in console:
+Required:
+* Python 3
+* Python libraries: requests, lxml, regex
+  
+Use your package manager (preferred) to install these libraries or run the following command in console:
 
 ```sh
 pip install --user requests lxml regex 
