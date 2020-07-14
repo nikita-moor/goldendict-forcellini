@@ -39,7 +39,7 @@ pip install --user requests lxml regex
 
 ```
 
-Download "Source code" of the [last release](../../releases/tag/v1.0) and save to your computer. Extract archive.
+Download "Source code" of the [last release](../../releases/tag/v1.2) and save to your computer. Extract archive.
 
 In GoldenDict, open menu Edit|Dictionaries, tab Programs. Add new item:
 
