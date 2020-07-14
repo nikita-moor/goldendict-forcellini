@@ -50,7 +50,7 @@ class WebDict(object):
                 "message": f"Server error code: {e}"
             }
 
-        if "Nothing has been found." in r.text:
+        if "Nothing has been found." in r.text or "searched Lat. word" not in r.text:
             return {
                 "success": False,
                 "message": "Word not found."
@@ -60,10 +60,10 @@ class WebDict(object):
         root = etree.HTML(text)
 
         # magic line identifying dictionary articles
-        MAGIC_CLASS = "font-family: Palatino Linotype, sans-serif, MS Reference Sans Serif, Microsoft Sans Serif, Verdana, Arial; font-size: 16pt;"
+        MAGIC_LINE = "font-family: Palatino Linotype, sans-serif, MS Reference Sans Serif, Microsoft Sans Serif, Verdana, Arial; font-size: 16pt;"
 
         definitions = []
-        for el in root.xpath(f'//div[@style="{MAGIC_CLASS}"]'):
+        for el in root.xpath(f'//div[@style="{MAGIC_LINE}"]'):
             # text = etree.tostring(el, encoding="unicode", method="html")
             definitions.append(el)
 
@@ -74,10 +74,11 @@ class WebDict(object):
                 "success": False,
                 "content": "Cannot parse answer! See `debug.html` for content."
             }
-        return {
-            "success": True,
-            "content": definitions,
-        }
+        else:
+            return {
+                "success": True,
+                "content": definitions,
+            }
 
     def parse(self, doc):
         doc.tag = "entryFree"
@@ -110,7 +111,7 @@ class WebDict(object):
             else:
                 print(f"DBG: unknown span style >>> {style}")
 
-        # fix referencies: <a href="forc2.php?searchedLG=POR">POR</a>
+        # fix references: "forc2.php?searchedLG=POR" > "POR"
         for el in doc.xpath("//entryFree//a"):
             el.attrib["href"] = el.attrib["href"][21:].lower()
 
@@ -136,7 +137,7 @@ class WebDict(object):
             r'\1 <sense level="2" marker="\2"><hi rend="bold">',
             html)
         html = re.sub(  # 1.
-            r'¶\s*<hi rend=\"bold\">\s*(\d\.)',
+            r'¶\s*<hi rend=\"bold\">\s*(\d+\.)',
             r'<sense level="3" marker="\1"><hi rend="bold">',
             html)
         html = re.sub(  # 1.°)
@@ -167,7 +168,10 @@ class WebDict(object):
         html = re.sub(r"([>.]) [—-] ", r"\1<br/>", html)
 
         html = re.sub(r"(\p{IsGreek}{2,}(?: \p{IsGreek}+)*)", r"<span lang='gr'>\1</span>", html)
-        html = re.sub(r"((?:It|Fr|Hisp|Germ|Angl)\.) <hi", r'<span class="lang">\1</span> <hi', html)
+
+        # translations
+        html = re.sub(r"((?:It|Fr|Hisp|Germ|Angl)\.) <hi rend=\"italic\">", r'<span class="lang">\1</span><hi rend="italic"> ', html)
+        html = re.sub(r"(<span class=\"lang\">\w+\.</span><hi rend=\"italic\">[\w ]+);(</hi>)", r"\1\2;", html)
 
         try:
             doc = etree.fromstring(f"<entryFree>{html}</entryFree>")
@@ -205,7 +209,18 @@ class WebDict(object):
             if el.text is None and len(el) == 0:
                 remove_element(el)
 
-       return doc
+        table_repl = [
+            ("AE", "Æ"), ("ae", "æ"),
+            ("OE", "Œ"), ("oe", "œ"),
+        ]
+        for el in doc.xpath("//*"):
+            for patt, repl in table_repl:
+                if el.text is not None:
+                    el.text = el.text.replace(patt, repl)
+                if el.tail is not None:
+                    el.tail = el.tail.replace(patt, repl)
+
+        return doc
 
     def read_cache(self, word):
         filename = f"{self.cache_dir}/{word}.json"
@@ -232,7 +247,7 @@ class WebDict(object):
             json.dump(def_txt, f, ensure_ascii=False)
 
     def make_html(self, definitions):
-        root = etree.Element("dictionary", {"id": "Digital Forcellini"})
+        root = etree.Element("dictionary", {"id": "DigitalForcellini"})
         el = etree.SubElement(root, "style", {"type": "text/css"})
         el.text = self.styles
         for subdef in definitions:
@@ -242,9 +257,15 @@ class WebDict(object):
         return html
 
     def normalize(self, word):
+        subs = [
+            ("æ", "ae"),
+            ("œ", "oe"),
+        ]
         word = word.lower()
         word = unicodedata.normalize("NFD", word)
         word = re.sub("[\u0300-\u036f]", "", word)
+        for patt, repl in subs:
+            word = word.replace(patt, repl)
         return [word]
 
     # def normalize(self, word):

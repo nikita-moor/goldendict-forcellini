@@ -1,16 +1,16 @@
-entryfree {
+#DigitalForcellini entryfree {
   display: block;
   margin-top: 1em;
 }
 
-sense {
+#DigitalForcellini sense {
   display: block;
   margin-top: .5em;
   margin-left: 2em;
   position: relative;
 }
 
-sense:before {
+#DigitalForcellini sense:before {
   content: attr(marker);
   position: absolute;
   left: -3em;
@@ -20,22 +20,28 @@ sense:before {
   font-weight: bold;
 }
 
-hi[rend="bold"]   { font-weight: bold;  }
-hi[rend="italic"] { font-style: italic; }
+#DigitalForcellini hi[rend="bold"]   { font-weight: bold;  }
+#DigitalForcellini hi[rend="italic"] { font-style: italic; }
 
-br {
+#DigitalForcellini br {
   display: block;
   content: "";
   margin-top: 0.5em;
 }
 
-span.lang {
+#DigitalForcellini span:lang(gr) { color: #780373; }
+
+#DigitalForcellini span.lang {
   color: white;
-  background: grey;
+  background: rgb(122, 142, 202);
   font-weight: bold;
   padding-left: .2em;
   padding-right: .2em;
 }
 
-span:lang(gr) { color: #780373; }
+#DigitalForcellini span.lang + hi[rend=italic] {
+  font-style: normal !important;
+  color: black;
+  background-color: rgb(219, 224, 255);
+}
 
